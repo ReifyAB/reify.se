@@ -33,7 +33,7 @@ Usage:
     {% endif %}
 
     <li>
-      {% render post_listing.html %}
+      {% include post_listing.html %}
     </li>
     {% if forloop.last %}
       </ul>

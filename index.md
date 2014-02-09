@@ -17,7 +17,7 @@ other interests of mine.
 <ul class="posts">
   {% for post in site.posts %}
   <li>
-    {% render post_listing.html %}
+    {% include post_listing.html %}
     <div class="brief">
       {{ post.content | split: '<!-- more -->' | first }}
     </div>
