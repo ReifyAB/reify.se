@@ -1,5 +1,5 @@
 {% if site.author.gravatar %}
-<div class="author-pic">
+<div class="author-pic hidden-phone">
   <img src="{{ site.author.gravatar }}" alt="{{ site.author.name }}" />
 </div>
 {% endif %}
@@ -7,12 +7,12 @@
 <div class="author-about">
   <h3>{{ site.author.name }}</h3>
   {% if site.author.title %}
-  <h4>{{ site.author.title }}</h4>
+  <h4 class="hidden-phone">{{ site.author.title }}</h4>
   {% endif %}
 
   <dl class="author-links">
     {% if site.author.email %}
-    <dl>
+    <dl class="hidden-phone">
       <dt>Email</dt>
       <dd>
         <a href="mailto: {{ autor.email }}">{{ site.author.email }}</a>
@@ -21,7 +21,7 @@
     {% endif %}
 
     {% if site.author.github %}
-    <dl>
+    <dl class="hidden-phone">
       <dt>
         Github
       </dt>
