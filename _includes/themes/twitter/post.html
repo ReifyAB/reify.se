@@ -1,8 +1,11 @@
 <div class="page-header">
-  <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
-
+  {% include twitter_share.html %}
+  <h1>
+    {{ page.title }} {% if page.tagline %}
+    <small>{{page.tagline}}</small>{% endif %}
+  </h1>
   <div class="row-fluid">
-    <div class="span9">
+    <div class="span8">
       {% unless page.categories == empty && page.tags == empty %}
       <ul class="tag_box inline">
 
@@ -21,11 +24,12 @@
       {% endunless %}
 
     </div>
-    <div class="span3">
+    <div class="span4">
       <div class="date">
         <span>{{ page.date | date_to_long_string }}</span>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -33,6 +37,7 @@
   <div class="span12">
     <div class="content">
       {{ content }}
+
     </div>
   </div>
 </div>

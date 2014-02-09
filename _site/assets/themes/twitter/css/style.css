@@ -23,6 +23,7 @@
 
 /* content */
 .content {
+  margin-bottom: 10px;
   font-size: medium;}
 .content h1 {
   font-size: xx-large;}
@@ -32,12 +33,13 @@
   padding: 0;
   margin-top: 0;
   margin-bottom: 10px;}
-
 .content .page-header .date {
   font-weight: bold;
-  padding-top: 5px;
   float: right;
   height: 100%;}
+.content .page-header .twitter-share {
+  margin-top: 10px;
+  float: right;}
 
 /* Custom container */
 .container-narrow {
@@ -88,6 +90,7 @@
 
 ul.posts {
   margin: 0;
+  margin-bottom: 10px;
   list-style-type: none;}
 ul.posts li .date {
   padding-left: 10px;
@@ -96,11 +99,13 @@ ul.posts li .date {
 ul.posts li .tagline {
   font-style: italic;}
 ul.posts li .brief {
-  padding: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
   color: #777;
   border-left: 1px solid #eee;
 }
 ul.posts li .read-on {
+  display: inline-block;
   background-color: #eee;
   padding: 10px;}
 ul.posts li .read-on:hover {
