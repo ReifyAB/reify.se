@@ -48,15 +48,12 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
-        <div class="span3">
-          <div class='about'>
-            {% include about.html %}
-          </div>
+        <div class="about span3">
+          {% include about.html %}
         </div>
-        <div class="span9">
-          <div class="content">
-            {{ content }}
-          </div>
+
+        <div class="content span9">
+          {{ content }}
         </div>
       </div>
       <hr>

@@ -1,3 +1,28 @@
+/* about */
+.about {
+  border: 5px dashed #eee;}
+.about .author-pic {
+  width: 100%;}
+.about .author-pic img {
+  display: block;
+  width: 80px;
+  margin: auto;}
+.about .author-about {
+  text-align: center;}
+.about .author-about h3 {
+  line-height: normal;
+  margin: 0;}
+.about .author-about h4 {
+  color: #555;
+  margin: 0;}
+.about .author-about dl {
+  color: #333;
+  margin: 0;}
+.about .author-about dl dd {
+  margin: 0;}
+
+/* content */
+
 /* Custom container */
 .container-narrow {
   margin: 0 auto;
