@@ -92,6 +92,9 @@ ul.posts {
   margin: 0;
   margin-bottom: 10px;
   list-style-type: none;}
+ul.posts li {
+  margin-bottom: 10px;
+}
 ul.posts li .date {
   padding-left: 10px;
   padding-right: 10px;
