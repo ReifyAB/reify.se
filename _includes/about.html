@@ -1,0 +1,47 @@
+{% if site.author.gravatar %}
+<div class="author-pic">
+  <img src="{{ site.author.gravatar }}" alt="{{ site.author.name }}" />
+</div>
+{% endif %}
+
+<div class="author-about">
+  <h3>{{ site.author.name }}</h3>
+  {% if site.author.title %}
+  <h4>{{ site.author.title }}</h4>
+  {% endif %}
+
+  <dl class="author-links">
+    {% if site.author.email %}
+    <dl>
+      <dt>Email</dt>
+      <dd>
+        <a href="mailto: {{ autor.email }}">{{ site.author.email }}</a>
+      </dd>
+    </dl>
+    {% endif %}
+
+    {% if site.author.github %}
+    <dl>
+      <dt>
+        Github
+      </dt>
+      <dd>
+        <a href="https://github.com/{{ site.author.github }}">
+          @{{ site.author.github }}
+        </a>
+      </dd>
+    </dl>
+    {% endif %}
+
+    {% if site.author.twitter %}
+    <dt>
+      Twitter
+    </dt>
+    <dd>
+      <a href="https://twitter.com/{{ site.author.twitter }}">
+        @{{ site.author.twitter }}
+      </a>
+    </dd>
+    {% endif %}
+  </dl>
+</div>

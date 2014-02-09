@@ -46,10 +46,18 @@
       </div>
     </div>
 
-    <div class="container-narrow">
-
-      <div class="content">
-        {{ content }}
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class='about'>
+            {% include about.html %}
+          </div>
+        </div>
+        <div class="span9">
+          <div class="content">
+            {{ content }}
+          </div>
+        </div>
       </div>
       <hr>
       <footer>
