@@ -17,9 +17,7 @@ other interests of mine.
 <ul class="posts">
   {% for post in site.posts %}
   <li>
-    <span class="date">{{ post.date | date_to_string }}</span>
-    <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
-    <span class="tagline">{{ post.tagline }}</span>
+    {% render post_listing.html %}
     <div class="brief">
       {{ post.content | split: '<!-- more -->' | first }}
     </div>
