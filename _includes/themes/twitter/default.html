@@ -54,20 +54,24 @@
 
     <div class="container-fluid">
       <div class="row-fluid">
+        {% unless page.skip-about %}
         <div class="about span3 hidden-phone">
           {% include about.html %}
         </div>
+        {% endunless %}
 
         <div class="content span9">
           {{ content }}
         </div>
       </div>
 
+      {% unless page.skip-about %}
       <div class="row-fluid visible-phone">
         <div class="about span12">
           {% include about.html %}
         </div>
       </div>
+      {% endunless %}
 
       {% if page.with-pagination %}
       <div class="row-fluid">
