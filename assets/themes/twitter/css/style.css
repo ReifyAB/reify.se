@@ -99,8 +99,7 @@ ul.posts li .date {
 ul.posts li .tagline {
   font-style: italic;}
 ul.posts li .brief {
-  padding-left: 10px;
-  padding-top: 10px;
+  padding: 10px;
   color: #777;
   border-left: 1px solid #eee;
 }
