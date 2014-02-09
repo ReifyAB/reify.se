@@ -5,13 +5,25 @@ tagline: Puts the Ninja in the Jawa
 ---
 {% include JB/setup %}
 
+You have now entered the realm of Jawaninja.
+
+**Do not panic!**
+
+Only friendly geekiness around here. Mostly about Clojure, music and
+other interests of mine.
+
+<h3>What's up?</h3>
+
 <ul class="posts">
   {% for post in site.posts %}
   <li>
-    <span>{{ post.date | date_to_string }}</span>&raquo;
+    <span class="date">{{ post.date | date_to_string }}</span>
     <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
     <span class="tagline">{{ post.tagline }}</span>
-    {{ post.content | split: '<!-- more -->' | first }}
+    <div class="brief">
+      {{ post.content | split: '<!-- more -->' | first }}
+    </div>
+    <a href="{{ BASE_PATH }}{{ post.url }}" class="read-on">Read on →</a>
   </li>
   {% endfor %}
 </ul>
