@@ -44,7 +44,7 @@ and see what properties it has. If it is missing the property you
 need, well that's a so-called type error.
 
 Another way to do that is to do the dispatch statically. A program is
-made of variable, that when running will hold values. They are called
+made of variables that when running will hold values. They are called
 variables because over time they will hold different values. A
 variable has the type of the union of the types of all the values it
 can hold at runtime.
@@ -53,22 +53,22 @@ What this means is that a variable can have the properties of all the
 values it can hold, but not necessarily all at once.
 
 We can annotate those variables before running our program (i.e
-statically) with their smallest type, or the set of property we
-believe they always hold at any given time later on when we will be
-running the program.
+statically) with their smallest type, that is the set of property we
+believe they will always hold at any given time later on when we
+actually run the program.
 
 By doing so, we can use the proper implementation for a given variable
-without having to look at the value itself at runtime, and we no
+without having to look at the value it is holding at runtime, so we no
 longer need to encode this property on the value itself.
 
 If we have annotated a variable with a given type, but pass on a value
 with another type, we get a type error and unexpected behavior.
 
-We can improve the our static dispatch approach by actually proving
-that each variable will only hold values that share it's properties,
-i.e is of the same type. This requires implementing a type checker
-that can reflect on the invariances of our program and infer the types
-of each variable, and unify them with our manual annotations.
+We can improve our static dispatch approach by actually proving that
+each variable will only hold values that share its properties, i.e are
+of the same type. This requires implementing a type checker that can
+reflect on the invariances of our program and infer the types of each
+variable without running it.
 
 If a unification fails, we get an error. By verifying a program with a
 type checker, we can get rid of all the type errors involving all the
@@ -81,4 +81,5 @@ runtime.
 
 Not all types are easily expressible and easy to reason about. And
 proving that certain variables have a given type can be
-computationally very expensive, if possible at all.
+computationally very expensive, if possible at all. But the more is
+expressed in the type system, the less can go wrong at runtime.
