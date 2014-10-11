@@ -1,7 +1,7 @@
 ---
 layout: post
 category : programming
-tagline: "The way I understand Types"
+tagline: "aka flamebaiting"
 tags : [types,programming]
 ---
 
