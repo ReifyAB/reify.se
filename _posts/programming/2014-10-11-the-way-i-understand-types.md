@@ -11,7 +11,9 @@ you have it.
 
 <!-- more -->
 
-Types are sets of properties held by values. In a language, the more
+# What is a Type?
+
+**Types are sets of properties held by values.** In a language, the more
 things you have that are values, the richer your types are.
 
 Values can have many sorts of properties: all values that are numbers
@@ -23,8 +25,8 @@ A type could be for instance "all values that are printable". Or even
 contain any value, i.e "all values that are not values".
 
 A type is large if many values belong to it, and is small when few
-do. The larger the type, the smaller the sets of properties it
-represents.
+do. **The larger the type, the smaller the sets of properties it
+represents.**
 
 The largest type a value can have is the type of having no particular
 property, so all values belong to it, whereas the smallest type is the
@@ -35,15 +37,21 @@ A value can have many properties: "3" is a value, a number, a
 representable value, and it has the value "3".
 
 So we could say that "3" is of type Value, Number, Representable, and
-BeingTheNumber3. We need to dispatch on those types at some point if
-we want to manipulate values.
+BeingTheNumber3.
+
+# What do we use types for?
+
+## Dispatching
+
+We need to dispatch on those types at some point if we want to
+manipulate values in our program.
 
 One way to go is to keep all that information in the value itself, and
-do a so-called dynamic dispatch: at runtime, simply look at the value
+do a so-called **dynamic dispatch**: at runtime, simply look at the value
 and see what properties it has. If it is missing the property you
 need, well that's a so-called type error.
 
-Another way to do that is to do the dispatch statically. A program is
+Another way to do that is to do a **static dispatch**. A program is
 made of variables that when running will hold values. They are called
 variables because over time they will hold different values. A
 variable has the type of the union of the types of all the values it
@@ -61,21 +69,23 @@ By doing so, we can use the proper implementation for a given variable
 without having to look at the value it is holding at runtime, so we no
 longer need to encode this property on the value itself.
 
+## Verifying
+
 If we have annotated a variable with a given type, but pass on a value
 with another type, we get a type error and unexpected behavior.
 
-We can improve our static dispatch approach by actually proving that
-each variable will only hold values that share its properties, i.e are
-of the same type. This requires implementing a type checker that can
-reflect on the invariances of our program and infer the types of each
-variable without running it.
+We can improve our static dispatch approach by actually **proving that
+each variable will only hold values that share its assumed
+properties**, i.e are of the same type. This requires implementing a
+type checker that can reflect on the invariances of our program and
+infer the types of each variable without running it.
 
 If a unification fails, we get an error. By verifying a program with a
 type checker, we can get rid of all the type errors involving all the
 types that are expressible and used in our program. This could be for
 instance that no matter what, we only fetch the first element on
 non-empty lists, or that we always add vectors of the same
-length. Types can express arbitrary invariances, as long as the
+length. **Types can express arbitrary invariances**, as long as the
 language can express them and the compiler can prove their veracity.
 
 To be noted, using dynamic dispatch does not preclude having a type
