@@ -27,9 +27,9 @@ do. The larger the type, the smaller the sets of properties it
 represents.
 
 The largest type a value can have is the type of having no particular
-property, (aka Top Type, or ⊤), or the type of having all the
-imaginable properties at once (aka the Bottom Type, or ⊥), which no
-value can belong to.
+property, so all values belong to it, whereas the smallest type is the
+type of having all the imaginable properties at once, which is
+impossible so no value can belong to it.
 
 A value can have many properties: "3" is a value, a number, a
 representable value, and it has the value "3".
