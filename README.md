@@ -3,7 +3,7 @@
 ## Dev
 
 ```sh
-jekyll serve --watch
+    jekyll serve --watch
 ```
 
 ## License
