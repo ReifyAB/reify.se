@@ -5,9 +5,9 @@ tagline: "aka flamebaiting"
 tags : [types,programming]
 ---
 
-This is my (mostly wrong) way of understanding types. I heard the best
-way to get feedback on the internet is to publish something
-inaccurate, so there you have it.
+This is my current intuition on types. I heard the best way to get
+feedback on the internet is to publish something inaccurate, so there
+you have it.
 
 <!-- more -->
 
