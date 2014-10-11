@@ -72,14 +72,18 @@ variable without running it.
 
 If a unification fails, we get an error. By verifying a program with a
 type checker, we can get rid of all the type errors involving all the
-types that are expressible and used in our program.
+types that are expressible and used in our program. This could be for
+instance that no matter what, we only fetch the first element on
+non-empty lists, or that we always add vectors of the same
+length. Types can express arbitrary invariances, as long as the
+language can express them and the compiler can prove their veracity.
 
 To be noted, using dynamic dispatch does not preclude having a type
-checkers. By having proper annotations, we can still reflect on the
-invariances of our program, even if that knowledge is not used at
-runtime.
+checker. By having proper annotations, we can still reflect on the
+invariances of our program, even if that knowledge is not necessarily
+used at runtime (see Gradual Typing, as with Clojure's core.typed).
 
-Not all types are easily expressible and easy to reason about. And
-proving that certain variables have a given type can be
-computationally very expensive, if possible at all. But the more is
-expressed in the type system, the less can go wrong at runtime.
+Not all types are easily expressible and/or easy to reason about. And
+proving that certain invariances are held can be computationally very
+expensive, if possible at all. But the more is expressed in the type
+system, the less can go wrong at runtime.
