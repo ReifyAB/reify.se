@@ -9,6 +9,8 @@ This is my (mostly wrong) way of understanding Types. I heard the best
 way to get feedback on the internet is to publish something
 inaccurate, so there you have it.
 
+<!-- more -->
+
 Types are sets of properties held by values. In a language, the more
 things you have that are values, the richer your Types are.
 
