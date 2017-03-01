@@ -156,3 +156,9 @@ footer {
   float: right;}
 
 /* pagination */
+
+iframe {
+  border: solid 1px gray;
+  background-color: gray;
+  margin: auto;
+}
