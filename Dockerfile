@@ -6,7 +6,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/
 
 RUN gem install github-pages -v 124
-RUN gem install pygments.rb -v 1.1.1
 
 VOLUME /site
 
