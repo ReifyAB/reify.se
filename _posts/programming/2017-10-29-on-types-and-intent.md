@@ -488,11 +488,11 @@ software engineering is taken seriously.
 Here is a bit of info about me. Those are some of the things I have
 played with and have investigated the trade-offs of in the context of
 functional programming. I'm sharing this list because I find the topic
-fascinating and I like to understand trade-off,
+fascinating and I like to understand trade-offs:
 
 * parametric polymorphism (Haskell, PureScript) vs ad-hoc polymorphism (Clojure) vs subtyping (Clojure, OCaml)
 * dynamic typing (Clojure) vs gradual typing (Racket, Clojure + core.typed) vs static typing (Haskell, PureScript, Elm)
-* higher order types vs dependent typing (Haskell, Idris)
+* dependent typing (Haskell, Idris)
 * verification (Promela) vs proof (Idris, Agda)
 
 Those trade-offs include soundness, verification, proofs, inference
