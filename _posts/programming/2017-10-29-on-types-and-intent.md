@@ -5,17 +5,44 @@ tagline: "how much can we communicate using types?"
 tags : [types,programming]
 ---
 
-Types are great. Haskell is great. Let's look at: `foo :: [a] -> [a]`. In
-Haskell, this type says "this is a function from List of `a` to List of
-`a`. This tells you quite a lot:
+I love Clojure and I love Haskell. Those are two of my favourite
+languages (I also really love Idris). They both offer semantics with
+very interesting properties and trade-offs.
+
+Sadly there is a disconnect between the communities in both of those
+languages, where people try to communicate what they like about their
+favourite language but tend to do that by contrasting it with other
+languages, and that ends up being quite antagonistic and put people on
+the defensive.
+
+<!-- more -->
+
+This is as true of people saying static typing is useless as it is of
+people saying that dynamically typed languages are recklessly
+unsafe. It would make life so much easier if either of those statement
+were true, but sadly we have to deal with the usual grey area.
+
+We also have to acknowledge that we are nowhere near the end of our
+journey towards understanding information and computation, we don't
+even understand our own reality how can we presume knowing how to
+model it using computers?
+
+Anyway, today I would like to try to bridge a little bit that gap
+between the Clojure and Haskell communities by trying to talk about
+the expressivity of types.
+
+# What's in a type?
+
+Types are great! They can carry a lot of information if you know what
+to look for. Let's look at: `foo :: [a] -> [a]`. In Haskell, this type
+says "this is a function from List of `a` to List of `a`". But this tells
+us so much more than that:
 
 * We have no assumptions on `a`, so we know we're not transforming the elements of the list.
 * Since the only assumption we have on the input is it's a list, that's the only thing we're allowed to manipulate. So we can only change its length, ordering and repetitions.
 * Since there is no `IO` in the type, the author is communicating that we can assume this function has no side effects.
 
-<!-- more -->
-
-So there really is not that many functions that satisfies this type. There is still an infinity of them though:
+So there really is not that many functions that satisfies this type. Sadly, there is still an infinity of them:
 
 ```haskell
 foo1 :: [a] -> [a]
@@ -47,29 +74,23 @@ intent, but they do provide some extra knowledge. I think from the
 above examples we can agree that intent has to be communicated through
 some other way (meaningful function names and documentation).
 
-Now let's look at how useful this knowledge is:
-
-## We're not transforming the elements of the list
-
-That's nice, but it does not actually gives us many guarantees in
-practice. Let's look at `foo7`:
+Let's look at `foo7`:
 
 ```haskell
 foo7 [1,2,3]
 -- [1,1,1]
 ```
 
-Is the information "we're not transforming the elements of the list?"
-useful here? Not really, even though the shape of the list is the
-same, its value is very much different. They also have very different
-runtime properties (one of them even being infinitly recursive).
+Is the information "we're not transforming the elements of the list"
+useful here? In this particular context, not really, even though the
+shape of the list is the same, its value is very much different. They
+also have very different runtime properties (one of them even being
+infinitly recursive).
 
-## We're only manipulating the List itself, not its element
-
-That's also nice, kind of the same thing as the above. But here's the
-thing: in this case, the implementation is still very much concrete on
-the type `List`. If we want to use sets or vectors instead, we have to
-work at another layer of abstraction. In Haskell, that would be Monoid:
+There's the another thing: in this case, the implementation is still
+very much concrete on the type `List`. If we want to use sets or
+vectors instead, we have to work at another layer of abstraction. In
+Haskell, that would be Monoid:
 
 ```haskell
 import Data.Monoid
@@ -154,14 +175,63 @@ So we need to explicitely tell Haskell that we mean the Sum version:
 --Sum {getSum = 9}
 ```
 
-Well this was a long roundabout way to reach my point: it's really
-cool that we're able to express our code in a way that's at the
-highest level of abstraction because then we can apply this code in
-any context that satisfies this abstraction, which is also the
-downside of it, because then you cannot know in which context that
-function will be used.
+So it's really cool that we're able to express our code in a way
+that's at the highest level of abstraction because then we can apply
+this code in any context that satisfies this abstraction, which is
+also the downside of it, because then you cannot know in which context
+that function will be used.
 
-## No IO convention
+Let's compare that to a piece of Clojure code:
+
+```clojure
+(reduce + [1 2 3])
+;;=> 6
+
+(reduce + [])
+;;=> 0
+
+(reduce * [])
+;;=> 1
+```
+
+How does that even work? Clojure manages to take advantage of the
+monoidal properties of `+` and `*` over numbers because that knowledge
+is found at the value level and not at the type level, so there is no
+ambiguity in the result. The downside is that you can't know
+beforehand if the reducer is monoidal or not, so you get a runtime
+error here instead:
+
+```clojure
+(reduce - [])
+;;!! ArityException Wrong number of args (0) passed to: core/-
+```
+
+Ah! Fun fact: the empty element for a monoid is implemented as the
+zero arity for a function. This is purely conventional. Obviously
+that's also not general: it means a given function can only be
+monoidal in one domain (numbers in the case of addition and
+multiplication).
+
+That doesn't mean we're stuck, we just have to use the fact that `-`
+forms a Semigroup on numbers instead (Monoid without neutral element),
+so that means we need to pass the initial value explicitely:
+
+```clojure
+(reduce - 0 [])
+;;-> 0
+
+(reduce - 0 [1 2 3])
+;;-> 6
+```
+
+The trade-off here is: I can think about those things in
+category-theory terms, but I don't have to impose this thinking on
+people around me (and in particular beginners). The downside is I'm
+not helped by the language out of the box to follow those rules.
+
+To me that's some interesting trade-off to think about!
+
+# No IO convention
 
 Maybe this will come as a shocker, but Haskell IO is pure by
 convention. This convention is enforced to some extent by the type
@@ -203,6 +273,25 @@ you're doing funky stuff!", and you'd be right: if you look at the
 code, you get more info about its behaviour. But we're only interested
 at how much information the type annotations contain, not the code.
 
+Clojure chooses to be immutable by default, but does not try to
+completely isolate side-effects. However it would not be fair to
+consider all Clojure code to be as if implicetely inside an
+`unsafePerformIO`!
+
+Why is that? Because Haskell relies on the knowledge that a function
+is pure to perform all sorts of optimisations. Like in our code above,
+it chooses to memoize the execution of `foo11` because its type
+signature says it's pure. This behaviour is implicit and happens
+at the compiler level. You'd have to express that explicitely in Clojure:
+
+```
+(def foo11
+  (memoize
+   (fn []
+    (println "yo")
+    11)))
+```
+
 # So what?
 
 Well, my point is that there's a point where convention dominates
@@ -219,11 +308,11 @@ typing is really important to me.
 
 # On information I care about
 
-Here are the means to communicate intent when writting code:
+Here are some of the means to communicate intent when writting code:
 
 * function and argument names
 * documentation
-* type annotations
+* type and contract annotations
 * the code itself
 
 If we look purely at the communicative power of what we write, the
@@ -243,7 +332,7 @@ Clojure has the following approach: there is a very small amount of
 abstractions, so that you can keep all of them in your head.
 
 Those two approaches require two different kinds of communication. If
-you have a very few set of abstraction, you can easily keep all of
+you have a very small set of abstractions, you can easily keep all of
 them in your head and apply them in your understanding of your
 code. If you have an infinite amount of abstractions, then you want as
 much help from the language as you can to not have to juggle all of
@@ -270,7 +359,7 @@ As an engineer, if my solution is perfect then I wasted too many
 resources in making it perfect. I want to find the most cost-efficient
 way to implement something.
 
-## How much can I sacrifice to reach my goal?
+# How much can I sacrifice to reach my goal?
 
 What's the minimum I need to communicate my intent and get it out
 there? Code.
@@ -282,11 +371,17 @@ there. Sometimes, if there is a 1 out of 10 chance of succeeding, I
 want to take that chance, and that might mean sacrificing all other
 benefits for short term gain.
 
-I want to work with a very small set of abstraction and just make the
-simplest thing that can possibly work without thinking about any of
-the edge cases. I might get a runtime error, but 90% of the time it
-will work and that will be good enough for me to sell my product,
-adapt to a new market, who knows.
+Sometimes being forced to think of all the edge-cases upfront is
+exactly what I need: when implementing a protocol or a parser or
+things like that, I want all the help I can with dealing with a
+million abstractions, because those abstractions are pushed onto
+me. So I'm not being dismissive of that use case.
+
+But (most of the time) I want to work with a very small set of
+abstraction and just make the simplest thing that can possibly work
+without thinking about any of the edge cases. I might get a runtime
+error, but the code will work 90% of the time and that will be good
+enough for me to sell my product, adapt to a new market, who knows.
 
 Having a type system that forces me to think about those edge cases
 works against this stated goal. It forces me to be correct above all,
@@ -294,38 +389,47 @@ but this is not what I want: I want to have the happy path solved as
 fast as possible, and I'll handle the edge cases as they show up
 over time.
 
-Now I also want the ability to add all those niceties and guarantees
-to my code, but I want the freedom to take risks. The next thing to
-add for communcation to me is meaningful names.
+I also want the ability to add all those niceties and guarantees
+to my code, but I want the freedom to take risks.
 
-That's usualy quite cheap to implement, because the first step of
+# How do I communicate intent?
+
+The first step to good communication is finding meaningful names.
+
+This is very much necessary anyway because the first step of
 implementing something is understanding the domain of that thing, and
 understanding the domain is all about naming things.
 
 Same with documentation: documentation is part of understanding the
 domain itself, and has value beyond the understanding of the code.
 
-Also some examples, that really helps with understanding. Those
-examples can be written as tests so that they can allow you to verify
-your code.
+Also finding some examples, that really helps with
+understanding. Those examples can be written as tests so that they can
+allow you to verify your code.
 
 Verification is a nice tool: it does not guarantee anything, but it
 allows you to check some of your assumptions. And you do need to
 verify your code, and that means writting tests.
 
-Finally, the last step (for me) is type annotation & static
-verifications. Those actually offer guarantees about your code
-(although really the Curry-Howard correspondence tells us that the
-code is the proof for your type propositions and not the other way
-around, so we usually have this understanding a bit backwards).
+Finally, type and contract annotation help with the boundaries of your
+code. Those allow to not only communicate the API between your
+functions, but also make sure that information is kept in sync with
+the code.
 
-But there is more!
+All of the above require constant maintenance. You might believe none
+of them should be negociable, but I believe they all are: for your
+given domain, you have to establish the cost and value of each of
+those, and decide if you want to invest in them upfront or only after
+you're successful.
 
-## What I care about right after "it works?"
+In some cases, the code itself is not even the most important, and the
+documentation and types are everything! And sometimes, only the
+artefact you've created matters.
 
-But before I even want to dig deeper into communicating intent,
-verifying and proving things, there are many other considerations I
-have in mind:
+# What do I care about right after "it works"?
+
+Beyond communicating intent, verifying and proving things, there are
+many other considerations I have in mind:
 
 * Will it run fast enough?
 * Will it scale?
