@@ -88,7 +88,7 @@ shape of the list is the same, its value is very much different. They
 also have very different runtime properties (one of them even being
 infinitly recursive).
 
-There's the another thing: in this case, the implementation is still
+There's another thing: in this case, the implementation is still
 very much concrete on the type `List`. If we want to use sets or
 vectors instead, we have to work at another layer of abstraction. In
 Haskell, that would be Monoid:
@@ -273,7 +273,7 @@ datastructure, and it makes sense because performance is important.
 You might say "Ha! but you're importing `System.IO.Unsafe` so we know
 you're doing funky stuff!", and you'd be right: if you look at the
 code, you get more info about its behaviour. But we're only interested
-at how much information the type annotations contain, not the code.
+at **how much information the type annotations contain, not the code**.
 
 Clojure chooses to be immutable by default, but does not try to
 completely isolate side-effects. However it would not be fair to
@@ -293,6 +293,26 @@ at the compiler level. You'd have to express that explicitely in Clojure:
     (println "yo")
     11)))
 ```
+
+Given there is no built-in type annotation in Clojure, what am I
+getting at? Well the "type" information is implicit, and much weaker
+than with Haskell, but the convention is stronger than other languages
+that are not immutable by default. You can most of the time assume the
+inputs are immutable, and are either a value or a collection of
+values.
+
+"Most of the time", "assume"... This doesn't sound very safe does it?
+The thing is, even though it's not obvious, we have to "assume" and
+"most of the time" in Haskell as well. We have to assume that the
+implementation of Monoid follows its associative and neutral element
+laws, and that our code does not contain non-lazy infinite
+recursions... At best, we can verify them through testing. Of course
+this is not true with dependent typing and Idris, but even with the
+state of the art you always end up drawing a line somewhere in
+practice.
+
+The interesting question (to me) is: **how much should we assume and
+how often?** Where do you draw the line for a given context?
 
 # Convention dominates information
 
