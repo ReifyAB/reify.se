@@ -316,9 +316,6 @@ Culture effect or random chance. But what it did was provide a set of
 conventions that were super efficient and was able to communicate
 those conventions somehow, thus pushing the industry forward.
 
-Communication is really the core of what we do, and communication is
-hard.
-
 # On means of communication
 
 Here are some of the means to communicate intent when writting code:
