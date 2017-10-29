@@ -27,9 +27,10 @@ journey towards understanding information and computation, we don't
 even understand our own reality how can we presume knowing how to
 model it using computers?
 
-Anyway, today I would like to try to bridge a little bit that gap
-between the Clojure and Haskell communities by trying to talk about
-the expressivity of types.
+Instead of figthing, we should strive together to find a deeper
+understanding of the principles and trade-off that are involved when
+writting and evolving code. I would like to make such attempt today by
+opening a conversation on the communicative power of types.
 
 # What's in a type?
 
@@ -118,12 +119,12 @@ empty value should not change the result for instance), but those
 rules are not enforced in Haskell, so it does not exactly help our
 understanding just by looking at the type.
 
-This is an intersting bit of trade-off: the higher abstraction you use
+This is an intersting bit of trade-off: **the higher abstraction you use**
 (and therefore the fewer assumptions you make), the more general you
-make your code and the more difficult it is to reason about it without
-context.
+make your code and **the more difficult it is to reason about it without
+context**.
 
-For instance, did you now that functions with monoidal output also
+For instance, did you know that functions with monoidal output also
 form a monoid? So this works:
 
 ```haskell
@@ -137,7 +138,7 @@ monoid (Sum), and so does the value `1` and multiplication (Product).
 
 So at the REPL, I can ask the type of this expression and it works:
 
-```
+```haskell
 :t foo10 (+) 1 2
 -- (foo10 (+) 1 2) :: (Num a, Monoid a) => a
 ```
@@ -148,7 +149,7 @@ the type alone (even though it should be obvious from the value `+`
 that we mean the Sum definition). So without more hint, Haskell will
 not be able to understand what we mean and refuse to compile:
 
-```
+```haskell
 (foo10 (+) 1 2)
 
 <interactive>:82:1: error:
@@ -224,14 +225,15 @@ so that means we need to pass the initial value explicitely:
 ;;-> 6
 ```
 
-The trade-off here is: I can think about those things in
-category-theory terms, but I don't have to impose this thinking on
-people around me (and in particular beginners). The downside is I'm
-not helped by the language out of the box to follow those rules.
+The trade-off here is: **I can think about those things** in
+category-theory terms, and **I don't have to impose this thinking on
+people around me** (and in particular beginners). But the downside is
+**I'm not helped by the language** out of the box to follow those
+rules.
 
 To me that's some interesting trade-off to think about!
 
-# No IO convention
+# On the no-side effect convention
 
 Maybe this will come as a shocker, but Haskell IO is pure by
 convention. This convention is enforced to some extent by the type
@@ -284,7 +286,7 @@ it chooses to memoize the execution of `foo11` because its type
 signature says it's pure. This behaviour is implicit and happens
 at the compiler level. You'd have to express that explicitely in Clojure:
 
-```
+```clojure
 (def foo11
   (memoize
    (fn []
@@ -292,11 +294,13 @@ at the compiler level. You'd have to express that explicitely in Clojure:
     11)))
 ```
 
-# So what?
+# Convention dominates information
 
-Well, my point is that there's a point where convention dominates
-information, otherwise you get to an infinitely high level of
-abstraction in turn requiring an infinite amount of context.
+This is what I'm getting at with this conversation.
+
+There's a point where **convention dominates information**, otherwise
+you get to an infinitely high level of abstraction in turn requiring
+an infinite amount of context.
 
 Where this point lies is the core of the debate. My position is that
 the conventions enforced statically at the type level by languages
@@ -306,7 +310,16 @@ debatable, but the fact that it comes at a cost should not be
 controversial. Understanding the cost / value proposition of static
 typing is really important to me.
 
-# On information I care about
+You can look at the fact that Ruby on Rails has been such a success
+and come to the conclusion that this success was only due to some Pop
+Culture effect or random chance. But what it did was provide a set of
+conventions that were super efficient and was able to communicate
+those conventions somehow, thus pushing the industry forward.
+
+Communication is really the core of what we do, and communication is
+hard.
+
+# On means of communication
 
 Here are some of the means to communicate intent when writting code:
 
@@ -321,8 +334,8 @@ mean. However, it's not convenient to read code, so the question is
 what do we use to make our life easier and our understanding quicker?
 
 The answer is dependent on the abstractions available in the language
-we use: how many particular cases do we need to keep in mind at all
-time?
+we use: **how many particular cases do we need to keep in mind at all
+time?**
 
 Haskell has the following approach: there is an infinite amount of
 abstractions that are expressible in the type system so that you don't
@@ -337,9 +350,9 @@ them in your head and apply them in your understanding of your
 code. If you have an infinite amount of abstractions, then you want as
 much help from the language as you can to not have to juggle all of
 them in your head, and type information becomes paramount. But beware
-that this can be a self-fulfilling profecy: you need an infinite
+that this can be a self-fulfilling profecy: **you need an infinite
 amount of types to deal with infinite abstractions, and infinte
-abstractions require an infinite number of types.
+abstractions require an infinite number of types**.
 
 So the end of the Haskell (PureScript, Idris...) journey is an
 asymptotic one: values and types evolve towards a meta-circular answer
@@ -348,8 +361,8 @@ phylosophy. It's an awesome journey by the way, I personally needed to
 step into the realm of dependent typing to begin to get an intuition
 about this.
 
-I digress a bit: my point is that if your goal is infinite abstraction,
-your solution will require infinite communication.
+I digress a bit: my point is that **if your goal is infinite abstraction,
+your solution will require infinite communication**.
 
 But infinite abstraction and infinite reuse is not one of my personal
 goal. What I care about is producing things as fast and reliably as I
@@ -469,21 +482,20 @@ understanding what they mean and their cost.
 Too often the conversation ends up being "you don't like types because
 you don't know enough types", or "types is only for academia and is
 always standing in my way". But I hope we can find an place where
-someone doesn't have to prove they know Profunctor Optics before their
-approach to software engineering is taken seriously.
+someone doesn't have to either prove they know Profunctor Optics or
+avoid using precise mathematical terms before their approach to
+software engineering is taken seriously.
 
 # Disclaimer: what do I know about the subject?
 
-Those are some of the things I have played with and have investigated
-the trade-offs of in the context of functional programming. Those do
-not fit in a blog post, but I want to make the context clear so that
-you do not have to make assumptions on a lack of research or effort on
-my part.
+Here is a bit of info about me. Those are some of the things I have
+played with and have investigated the trade-offs of in the context of
+functional programming. I'm sharing this list because I find the topic
+fascinating and I like to understand trade-off,
 
 * parametric polymorphism (Haskell, PureScript) vs ad-hoc polymorphism (Clojure) vs subtyping (Clojure, OCaml)
 * dynamic typing (Clojure) vs gradual typing (Racket, Clojure + core.typed) vs static typing (Haskell, PureScript, Elm)
-* row polymorphism (PureScript)
-* dependent typing (Haskell, Idris)
+* higher order types vs dependent typing (Haskell, Idris)
 * verification (Promela) vs proof (Idris, Agda)
 
 Those trade-offs include soundness, verification, proofs, inference
@@ -501,7 +513,8 @@ familiar with.
 I have a million more things to express, but the gist of what I'm
 trying to say is: let's not conflate good software engineering
 practices (or functional programming for that matter) with just static
-typing. Even static verification should not be mistaken with or
-limited to static typing. Doing so goes against the very essence of
-engineering. State your constraints, assumptions and objectives first,
-and consider Static Typing as a tool, not an end in itself.
+typing, and let's not dismiss it either. Even static verification
+should not be mistaken with or limited to static typing. Doing so goes
+against the very essence of engineering. State your constraints,
+assumptions and objectives first, and consider Static Typing as a
+tool, not an end in itself.
