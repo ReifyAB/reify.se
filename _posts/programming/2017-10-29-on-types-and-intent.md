@@ -113,11 +113,11 @@ returns values of the same type" both carries more and less information.
 
 `Monoid a` means the type `a` contains a value that's considered the
 empty element (mempty in Haskell), and an operation on its values
-(mappend) that can combine them into a value that belongs to that also
-is of type `a`. They should follow a few special rules (appending the
-empty value should not change the result for instance), but those
-rules are not enforced in Haskell, so it does not exactly help our
-understanding just by looking at the type.
+(mappend) that can combine them into a value that that also is of type
+`a`. They should follow a few special rules (appending the empty value
+should not change the result for instance), but those rules are not
+enforced in Haskell, so it does not exactly help our understanding
+just by looking at the type.
 
 This is an intersting bit of trade-off: **the higher abstraction you use**
 (and therefore the fewer assumptions you make), the more general you
