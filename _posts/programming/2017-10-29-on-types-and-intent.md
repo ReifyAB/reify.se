@@ -293,10 +293,11 @@ consider all Clojure code to be as if implicetely inside an
 `unsafePerformIO`!
 
 Why is that? Because Haskell relies on the knowledge that a function
-is pure to perform all sorts of optimisations. Like in our code above,
-it chooses to memoize the execution of `foo11` because its type
-signature says it's pure. This behaviour is implicit and happens
-at the compiler level. You'd have to express that explicitely in Clojure:
+is pure to perform all sorts of optimisations, which is really good
+for performance. Like in our code above, it chooses to memoize the
+execution of `foo11` because its type signature says it's pure. This
+behaviour is implicit and happens at the compiler level. You'd have to
+express that explicitely in Clojure:
 
 ```clojure
 (def foo11
