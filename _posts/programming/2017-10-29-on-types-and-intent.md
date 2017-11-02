@@ -198,9 +198,21 @@ Let's compare that to a piece of Clojure code:
 How does that even work? Clojure manages to take advantage of the
 monoidal properties of `+` and `*` over numbers because that knowledge
 is found at the value level and not at the type level, so there is no
-ambiguity in the result. The downside is that you can't know
-beforehand if the reducer is monoidal or not, so you get a runtime
-error here instead:
+ambiguity in the result.
+
+The thing is, the mathematical definition of monoid is on a Set (Type)
+and an Operation (Value). But in Haskell, it is only polymorphic on
+the Type, meaning you have to create a unique type for each particular
+monoid. There is an infinite number of Monoids on Lists and Numbers,
+but you can only represent one of them as "the List Monoid".
+
+Not saying this is impossible to achieve in a staticly typed language,
+but you'd have to look at dependent typing intead.
+
+Anyway, you can use runtime polymorphism in Clojure to have monoids
+that are closer to their mathematical definition, the downside is that
+you can't know beforehand if the reducer is monoidal or not, so you
+get a runtime error here instead:
 
 ```clojure
 (reduce - [])
@@ -233,7 +245,7 @@ rules.
 
 To me that's some interesting trade-off to think about!
 
-# On the no-side effect convention
+# How many assumptions do we make?
 
 Maybe this will come as a shocker, but Haskell IO is pure by
 convention. This convention is enforced to some extent by the type
