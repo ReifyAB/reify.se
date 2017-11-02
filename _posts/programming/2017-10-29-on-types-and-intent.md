@@ -434,6 +434,29 @@ over time.
 I also want the ability to add all those niceties and guarantees
 to my code, but I want the freedom to take risks.
 
+Now how can I have my cake and eat it too? In order to have
+maintenable code, you need runtime tests (to make sure that the
+runtime properties of your project hold). Some of those tests can be
+replaced by static typing.
+
+Now the question is: is the cost of having static types (in terms of
+rigidity, numbers of abstraction and required context) lower than
+maintening a test suite for the guarantees covered by those types?
+
+In the case of Clojure vs Haskell specifically (both of which have
+immutable data, namespacing, explicit side-effects), both approaches
+seem empirically equivalent in my experience, so I favor the one that
+is objectively "smaller" (fewer abstractions, smaller context).
+
+You can always compare Clojure to Java/C++ and Haskell to
+JavaScript/Python, and they would come out obviously winning.
+
+You can also compare Clojure to JavaScript/Python and Haskell to
+Java/C++, and they would also be winning.
+
+That's not how euclidian distance works though, those are not very
+useful comparison.
+
 # How do I communicate intent?
 
 The first step to good communication is finding meaningful names.
