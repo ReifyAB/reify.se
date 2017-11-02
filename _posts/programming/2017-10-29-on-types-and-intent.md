@@ -390,8 +390,8 @@ phylosophy. It's an awesome journey by the way, I personally needed to
 step into the realm of dependent typing to begin to get an intuition
 about this.
 
-I digress a bit: my point is that **if your goal is infinite abstraction,
-your solution will require infinite communication**.
+I digress a bit: my point is that **if your goal is many abstractions,
+your solution will require a lot of communication**.
 
 But infinite abstraction and infinite reuse is not one of my personal
 goal. What I care about is producing things as fast and reliably as I
