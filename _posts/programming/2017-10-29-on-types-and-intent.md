@@ -490,9 +490,10 @@ rigidity, numbers of abstraction and required context) lower than
 maintening a test suite for the guarantees covered by those types?
 
 In the case of Clojure vs Haskell specifically (both of which have
-immutable data, namespacing, explicit side-effects), both approaches
-seem empirically equivalent in my experience, so I favor the one that
-is objectively "smaller" (fewer abstractions, smaller context).
+immutable data, namespacing, explicit side-effects, static name
+resolution), both approaches seem empirically equivalent in my
+experience, so I favor the one that is objectively "smaller" (fewer
+abstractions, smaller context).
 
 You can always compare Clojure to Java/C++ and Haskell to
 JavaScript/Python, and they would come out obviously winning.
