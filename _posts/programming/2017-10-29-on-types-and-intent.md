@@ -200,6 +200,8 @@ monoidal properties of `+` and `*` over numbers because that knowledge
 is found at the value level and not at the type level, so there is no
 ambiguity in the result.
 
+There is an infinite number of monoids on numbers by the way, we can
+find an easy pattern to generate some of them.
 The thing is, the mathematical definition of monoid is on a Set (Type)
 and an Operation (Value). But in Haskell, it is only polymorphic on
 the Type, meaning you have to create a unique type for each particular
@@ -208,6 +210,55 @@ but you can only represent one of them as "the List Monoid".
 
 Not saying this is impossible to achieve in a staticly typed language,
 but you'd have to look at dependent typing intead.
+
+Let's look at a base case in Clojure:
+
+```clojure
+(defn ++ [a b] (+ a b 1))
+
+(= (++ 1 (++ 2 3))
+   (++ (++ 1 2) 3))
+;;=> true
+
+(= (++ -1 5) (++ 5 -1) 5)
+;;=> true
+```
+
+So we have a base case: addition plus one, with neutral element
+`-1`. Fun fact: the empty element for a monoid is implemented as the
+zero arity for a function. This is purely conventional. Obviously
+that's also not general: it means a given function can only be
+monoidal in one domain (numbers in the case of addition and
+multiplication).
+
+Anyway, let's write a monoid generator given this information:
+
+```clojure
+(defn add-n-monoid [n]
+  (fn ([] (- n))
+      ([a b] (+ a b n))))
+
+(def ++1 (add-n-monoid 1))
+(def ++2 (add-n-monoid 2))
+(def ++3 (add-n-monoid 3))
+
+(= (++1 1 (++1 2 3))
+   (++1 (++1 1 2) 3))
+;;=> true
+
+(= (++1 (++1) 5) (++1 5 (++1)) 5)
+;;=> true
+```
+
+Yay, infinite number of monoids!
+
+```clojure
+(reduce ++3 [])
+;;=> -3
+
+(reduce ++3 [1 2 3 4])
+;;=> 19
+```
 
 Anyway, you can use runtime polymorphism in Clojure to have monoids
 that are closer to their mathematical definition, the downside is that
@@ -219,15 +270,9 @@ get a runtime error here instead:
 ;;!! ArityException Wrong number of args (0) passed to: core/-
 ```
 
-Ah! Fun fact: the empty element for a monoid is implemented as the
-zero arity for a function. This is purely conventional. Obviously
-that's also not general: it means a given function can only be
-monoidal in one domain (numbers in the case of addition and
-multiplication).
-
-That doesn't mean we're stuck, we just have to use the fact that `-`
-forms a Semigroup on numbers instead (Monoid without neutral element),
-so that means we need to pass the initial value explicitely:
+That doesn't mean we're stuck, that just means we can't rely on the
+monoidal "neutral element", we need to pass the initial value
+explicitely:
 
 ```clojure
 (reduce - 0 [])
