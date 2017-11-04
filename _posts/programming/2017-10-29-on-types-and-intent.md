@@ -85,8 +85,18 @@ foo7 [1,2,3]
 Is the information "we're not transforming the elements of the list"
 useful here? In this particular context, not really, even though the
 shape of the list is the same, its value is very much different. They
-also have very different runtime properties (one of them even being
-infinitly recursive).
+also have very different runtime properties. Some have constant time,
+linear time, quadratic time... one of them even being infinitely
+recursive, which depending on where it's called can freeze your
+execution (like in a `foldl` for instance).
+
+If you want that extra safety of making sure your program will
+terminate when you compile it, you need a type system that supports
+totality checking. Not possible in the general case (halting problem),
+but in many inductive cases (check Idris if you're
+interested). Although note that those checks only guarantee your
+program will terminate "at some point", but that point can be 100
+years in the future so still not foolproof.
 
 There's another thing: in this case, the implementation is still
 very much concrete on the type `List`. If we want to use sets or
