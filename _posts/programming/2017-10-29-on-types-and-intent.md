@@ -628,4 +628,11 @@ against the very essence of engineering. State your constraints,
 assumptions and objectives first, and consider Static Typing as a
 tool, not an end in itself.
 
-**Others don't have to be wrong for you to be right.**
+> Asymptotically approaching an answer that's forever out of reach in
+> the pursuit of truth: that's **Science**.
+>
+> Finding the smallest and cheapest thing that can possibly work: that's
+> **Engineering**.
+>
+> The two are completing each other and should be considered **in
+> harmony, not conflict**.
