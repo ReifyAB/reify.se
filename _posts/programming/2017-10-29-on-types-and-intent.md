@@ -96,7 +96,7 @@ totality checking. This is not possible to achieve in the general case
 (halting problem), but it is for many inductive cases (check Idris if
 you're interested). Although note that those checks only guarantee
 your program will terminate "at some point", but that point can be 100
-years in the future, so still not entirely safe in practice.
+years in the future, so it's still not entirely safe in practice.
 
 There's another thing: in this case, the implementation is still
 very much concrete on the type `List`. If we want to use sets or
