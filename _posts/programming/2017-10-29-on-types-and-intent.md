@@ -92,11 +92,11 @@ execution (like in a `foldl` for instance).
 
 If you want that extra safety of making sure your program will
 terminate when you compile it, you need a type system that supports
-totality checking. Not possible in the general case (halting problem),
-but in many inductive cases (check Idris if you're
-interested). Although note that those checks only guarantee your
-program will terminate "at some point", but that point can be 100
-years in the future so still not foolproof.
+totality checking. This is not possible to achieve in the general case
+(halting problem), but it is for many inductive cases (check Idris if
+you're interested). Although note that those checks only guarantee
+your program will terminate "at some point", but that point can be 100
+years in the future, so still not entirely safe in practice.
 
 There's another thing: in this case, the implementation is still
 very much concrete on the type `List`. If we want to use sets or
@@ -302,10 +302,9 @@ To me that's some interesting trade-off to think about!
 
 # How many assumptions do we make?
 
-Maybe this will come as a shocker, but Haskell IO is pure by
-convention. This convention is enforced to some extent by the type
-system, but you can always bypass it and do weird stuff. Let's define
-this interesting piece of code:
+Haskell is pure by convention. This convention is enforced to some
+extent by the type system, but you can always bypass it and do weird
+stuff. Let's define this interesting piece of code:
 
 ```haskell
 import System.IO.Unsafe
