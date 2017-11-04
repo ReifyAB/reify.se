@@ -490,7 +490,7 @@ I also want the ability to add all those niceties and guarantees
 to my code, but I want the freedom to take risks.
 
 Now how can I have my cake and eat it too? In order to have
-maintenable code, you need runtime tests (to make sure that the
+maintainable code, you need runtime tests (to make sure that the
 runtime properties of your project hold). Some of those tests can be
 replaced by static typing.
 
