@@ -27,7 +27,7 @@ journey towards understanding information and computation, we don't
 even understand our own reality how can we presume knowing how to
 model it using computers?
 
-Instead of figthing, we should strive together to find a deeper
+Instead of fighting, we should strive together to find a deeper
 understanding of the principles and trade-off that are involved when
 writting and evolving code. I would like to make such attempt today by
 opening a conversation on the communicative power of types.
@@ -343,7 +343,7 @@ at **how much information the type annotations contain, not the code**.
 
 Clojure chooses to be immutable by default, but does not try to
 completely isolate side-effects. However it would not be fair to
-consider all Clojure code to be as if implicetely inside an
+consider all Clojure code to be as if implicitly inside an
 `unsafePerformIO`!
 
 Why is that? Because Haskell relies on the knowledge that a function
@@ -351,7 +351,7 @@ is pure to perform all sorts of optimisations, which is really good
 for performance. Like in our code above, it chooses to memoize the
 execution of `foo11` because its type signature says it's pure. This
 behaviour is implicit and happens at the compiler level. You'd have to
-express that explicitely in Clojure:
+express that explicitly in Clojure:
 
 ```clojure
 (def foo11
