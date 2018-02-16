@@ -13,7 +13,7 @@ they write before running it. It does this by using something called
 One of the guarantees you can get is to have safe arithmetic with
 natural numbers (0, 1, 2, 3...). The interesting bit with Natural
 numbers is that they cannot be negative, so the substraction `a - b`
-only works if `a > b`. Idris actually forces you to make sure of that
+only works if `b ≤ a`. Idris actually forces you to make sure of that
 before trying to run your code.
 
 <!-- more -->
@@ -330,7 +330,7 @@ is impossible, i.e. we need to have a proposition that given `x` and
 How do we do that? Actually similarly to how we defined natural numbers:
 
  - Any natural number is larger than zero
- - If `n < m`, then `(n + 1) < (m + 1)`
+ - If `n ≤ m`, then `(n + 1) ≤ (m + 1)`
 
 In Idris that translates to something like this:
 
@@ -340,26 +340,26 @@ data MyLTE  : (m : MyNat) -> (n : MyNat) -> Type where
   MyLTESucc : MyLTE left right -> MyLTE (MS left) (MS right)
 ```
 
-So if you want to write `0 < 2`, you would write:
+So if you want to write `0 ≤ 2`, you would write:
 
 ```haskell
 zeroLessThanTwo : MyLTE MZ (MS (MS MZ))
 zeroLessThanTwo = MyLTEZero
 ```
 
-If you want to write `2 < 3`, you would write:
+If you want to write `2 ≤ 3`, you would write:
 
 ```haskell
 twoLessThanThree : MyLTE (MS (MS MZ)) (MS (MS (MS MZ)))
 twoLessThanThree = (MyLTESucc (MyLTESucc MyLTEZero))
 ```
 
-So `MyLTE (MS (MS MZ)) (MS (MS (MS MZ)))` is the proposition that `2 <
+So `MyLTE (MS (MS MZ)) (MS (MS (MS MZ)))` is the proposition that `2 ≤
 3`, and `(MyLTESucc (MyLTESucc MyLTEZero))` is the proof that it's
 true.
 
 Given this, let's start over our definition of minus, this time
-requiring a proof that `m < n`:
+requiring a proof that `m ≤ n`:
 
 ```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> MyLTE n m -> MyNat
@@ -382,8 +382,8 @@ mminus (MS right) (MS left) (MyLTESucc x) = ?mminus'_rhs_2
 
 Cool! This is where the "dependent type" magic happens: case splitting
 on the proof has an effect on the arguments `m` and `n`: if the proof
-you provide is `0 < m`, then clearly `n = 0`, and if the proof you
-provide looks like `(1 + x) < (1 + y)`, then clearly `m` and `n` are
+you provide is `0 ≤ m`, then clearly `n = 0`, and if the proof you
+provide looks like `(1 + x) ≤ (1 + y)`, then clearly `m` and `n` are
 not zero.
 
 So let's fill in some of the logic:
