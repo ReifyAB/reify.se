@@ -343,23 +343,23 @@ data MyLTE  : (m : MyNat) -> (n : MyNat) -> Type where
 So if you want to write `0 < 2`, you would write:
 
 ```haskell
-MyLTEZero MZ (MS (MS MZ))
+zeroLessThanTwo : MyLTE MZ (MS (MS MZ))
+zeroLessThanTwo = MyLTEZero
 ```
 
 If you want to write `2 < 3`, you would write:
 
 ```haskell
-(MyLTESucc (MyLTESucc (MyLTEZero MZ (MS MZ))))
+twoLessThanThree : MyLTE (MS (MS MZ)) (MS (MS (MS MZ)))
+twoLessThanThree = (MyLTESucc (MyLTESucc MyLTEZero))
 ```
 
-Really the above is a way to construct a proof that `2 < 3` more than
-a way to ask the question "is `2` less than `3`?". This is a fact
-derived from the definitions we've given for "what is a natural
-number?" and "what does it mean for a natural number to be less than
-or equal to another natural number?"
+So `MyLTE (MS (MS MZ)) (MS (MS (MS MZ)))` is the proposition that `2 <
+3`, and `(MyLTESucc (MyLTESucc MyLTEZero))` is the proof that it's
+true.
 
-Anywho, let's start over our definition of minus, this time requiring
-a proof that `m < n`:
+Given this, let's start over our definition of minus, this time
+requiring a proof that `m < n`:
 
 ```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> MyLTE n m -> MyNat
