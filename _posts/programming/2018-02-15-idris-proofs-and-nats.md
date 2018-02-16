@@ -60,7 +60,7 @@ foo : Nat
 foo = (2 + 2) - 3
 ```
 
-Yup! That works! Neat, so Idris can figure out that `2 + 2 > 3` at
+Yup! That works! Neat, so Idris can figure out that `2 + 2 ≥ 3` at
 compile time. Let's try something harder: can we abstract over one of
 the parameters?
 
@@ -90,7 +90,7 @@ foo n = (3 + n) - 3
 ```
 
 OMG! Yep that compiles! So Idris manages to figure out that given any
-natural number `n`, `3 + n > 3`! That's really cool!
+natural number `n`, `3 + n ≥ 3`! That's really cool!
 
 It does that just by itself, without me having to prove anything.
 
