@@ -22,21 +22,21 @@ before trying to run your code.
 
 Let's look at some code:
 
-```idris
+```haskell
 foo : Nat
 foo = 4 - 3
 ```
 
 Idris will gladly compile, then you can ask the value of `foo` at the REPL to evaluate the result:
 
-```
+```haskell
 λΠ> foo
 1 : Nat
 ```
 
 Now if we try another case where `a` is smaller than `b`, then idris will not be happy:
 
-```idris
+```haskell
 foo : Nat
 foo = 2 - 3
 
@@ -55,7 +55,7 @@ smaller than 2.
 
 That's pretty neat! Now how smart is idris then? Let's try!
 
-```idris
+```haskell
 foo : Nat
 foo = (2 + 2) - 3
 ```
@@ -64,7 +64,7 @@ Yup! That works! Neat, so Idris can figure out that `2 + 2 > 3` at
 compile time. Let's try something harder: can we abstract over one of
 the parameters?
 
-```idris
+```haskell
 foo : Nat -> Nat
 foo n = n - 3
 
@@ -84,7 +84,7 @@ instance, if `n = 2` then that's not true).
 
 But wait...
 
-```idris
+```haskell
 foo : Nat -> Nat
 foo n = (3 + n) - 3
 ```
@@ -99,7 +99,7 @@ It does that just by itself, without me having to prove anything.
 Let's look a bit closer at the `-` function:
 
 
-```idris
+```haskell
 λΠ> :doc (-)
 Prelude.Nat.(-) : (m : Nat) -> (n : Nat) -> {auto smaller : LTE n m} -> Nat
 
@@ -124,7 +124,7 @@ context. `auto` is a keyword that tells Idris to automatically derive
 that parameter from context. So if we removed all that fluff, we could
 rewrite the type like this:
 
-```idris
+```haskell
 Prelude.Nat.(-) : (m : Nat) -> (n : Nat) -> (smaller : LTE n m) -> Nat
 ```
 
@@ -144,7 +144,7 @@ OK maybe that's a bit too much... Perhaps the best way is to try to re-implement
 Let's first define natural numbers. We can define them recursively, by
 saying it's either `0` or the successor of another natural number:
 
-```idris
+```haskell
 data MyNat : Type where
   MZ : MyNat
   MS : MyNat -> MyNat
@@ -156,7 +156,7 @@ representation is just sugar).
 
 So we can implement addition like this. First we declare the type of addition:
 
-```idris
+```haskell
 mplus : MyNat -> MyNat -> MyNat
 ```
 
@@ -165,14 +165,14 @@ you another natural number". From that and from your text editor, you
 can ask Idris to add a placeholder body for the function definition
 (in emacs, `C-c C-s`)
 
-```idris
+```haskell
 mplus : MyNat -> MyNat -> MyNat
 mplus x y = ?mplus_rhs
 ```
 
 The part with a question mark is what needs to be filled. If you evaluate that code in idris (`C-c C-l`), Idris will tell you something like this:
 
-```idris
+```haskell
 Holes
 
 This buffer displays the unsolved holes from the currently-loaded code. Press
@@ -194,7 +194,7 @@ the first argument to see if we can get more things at our disposal.
 In emacs you do that by putting your cursor on the first argument and
 pressing `C-c C-c`, resulting in this:
 
-```idris
+```haskell
 mplus : MyNat -> MyNat -> MyNat
 mplus MZ y = ?mplus_rhs_1
 mplus (MS x) y = ?mplus_rhs_2
@@ -202,7 +202,7 @@ mplus (MS x) y = ?mplus_rhs_2
 
 Which after you load (`C-c C-l`) you get:
 
-```idris
+```haskell
 Holes
 
 This buffer displays the unsolved holes from the currently-loaded code. Press
@@ -223,7 +223,7 @@ the [P] buttons to solve the holes interactively in the prover.
 If we look at the first case, the first argument is zero. In that case
 we just need to return the second argument (`0 + y = y`). Since nothing is ambiguous here, we can even ask idris to fill that for us by putting the cursor on `?mplus_rhs_1` and performing a "proof search" (pressing `C-c C-a`):
 
-```idris
+```haskell
 mplus : MyNat -> MyNat -> MyNat
 mplus MZ y = y
 mplus (MS x) y = ?mplus_rhs_2
@@ -238,7 +238,7 @@ Pretty neat eh?
 
 Now the second bit if we do the same we get the same result:
 
-```idris
+```haskell
 mplus : MyNat -> MyNat -> MyNat
 mplus MZ y = y
 mplus (MS x) y = y
@@ -251,7 +251,7 @@ that, in this case `y`.
 Fine, let's just use our human brains. We can use the property that `(1 + x) + y = 1 + (x + y)`:
 
 
-```idris
+```haskell
 mplus : MyNat -> MyNat -> MyNat
 mplus MZ y = y
 mplus (MS x) y = MS (mplus x y)
@@ -259,7 +259,7 @@ mplus (MS x) y = MS (mplus x y)
 
 We can try it out at the REPL:
 
-```idris
+```haskell
 λΠ> mplus (MS (MS MZ)) (MS (MS MZ))
 MS (MS (MS (MS MZ))) : MyNat
 
@@ -272,20 +272,20 @@ OK it hurts the eye a little but we can see that `2 + 2 = 4` and `2 +
 
 Now let's move to substraction. First the type:
 
-```idris
+```haskell
 mminus : MyNat -> MyNat -> MyNat
 ```
 
 Then add the body automatically:
 
-```idris
+```haskell
 mminus : MyNat -> MyNat -> MyNat
 mminus x y = ?mminus_rhs
 ```
 
 Case split on the second argument:
 
-```idris
+```haskell
 mminus : MyNat -> MyNat -> MyNat
 mminus x MZ = ?mminus_rhs_1
 mminus x (MS y) = ?mminus_rhs_2
@@ -293,7 +293,7 @@ mminus x (MS y) = ?mminus_rhs_2
 
 OK `x - 0 = x` so we can fill the first case:
 
-```idris
+```haskell
 mminus : MyNat -> MyNat -> MyNat
 mminus x MZ = x
 mminus x (MS y) = ?mminus_rhs_2
@@ -301,7 +301,7 @@ mminus x (MS y) = ?mminus_rhs_2
 
 For the second case we need to split again on `x` actually:
 
-```idris
+```haskell
 mminus : MyNat -> MyNat -> MyNat
 mminus x MZ = x
 mminus MZ (MS y) = ?mminus_rhs_1
@@ -310,7 +310,7 @@ mminus (MS x) (MS y) = ?mminus_rhs_3
 
 OK last case we can use the fact that `(x + 1) - (y + 1) = x - y`:
 
-```idris
+```haskell
 mminus : MyNat -> MyNat -> MyNat
 mminus x MZ = x
 mminus MZ (MS y) = ?mminus_rhs_1
@@ -334,7 +334,7 @@ How do we do that? Actually similarly to how we defined natural numbers:
 
 In Idris that translates to something like this:
 
-```idris
+```haskell
 data MyLTE  : (m : MyNat) -> (n : MyNat) -> Type where
   MyLTEZero : MyLTE MZ right
   MyLTESucc : MyLTE left right -> MyLTE (MS left) (MS right)
@@ -342,13 +342,13 @@ data MyLTE  : (m : MyNat) -> (n : MyNat) -> Type where
 
 So if you want to write `0 < 2`, you would write:
 
-```idris
+```haskell
 MyLTEZero MZ (MS (MS MZ))
 ```
 
 If you want to write `2 < 3`, you would write:
 
-```idris
+```haskell
 (MyLTESucc (MyLTESucc (MyLTEZero MZ (MS MZ))))
 ```
 
@@ -361,20 +361,20 @@ or equal to another natural number?"
 Anywho, let's start over our definition of minus, this time requiring
 a proof that `m < n`:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> MyLTE n m -> MyNat
 ```
 
 Add body:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> MyLTE n m -> MyNat
 mminus m n x = ?mminus'_rhs
 ```
 
 This time we split on the proof (`x`):
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> MyLTE n m -> MyNat
 mminus m MZ MyLTEZero = ?mminus'_rhs_1
 mminus (MS right) (MS left) (MyLTESucc x) = ?mminus'_rhs_2
@@ -388,7 +388,7 @@ not zero.
 
 So let's fill in some of the logic:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> MyLTE n m -> MyNat
 mminus m MZ MyLTEZero = m
 mminus (MS right) (MS left) (MyLTESucc x) = mminus right left ?prf
@@ -396,7 +396,7 @@ mminus (MS right) (MS left) (MyLTESucc x) = mminus right left ?prf
 
 If we look at the hole left for the proof in the recursive part of this function, we see this:
 
-```idris
+```haskell
 - + Main.prf [P]
  `--     right : MyNat
           left : MyNat
@@ -407,7 +407,7 @@ If we look at the hole left for the proof in the recursive part of this function
 
 There's a hole of type `MyLTE left right` and a parameter `x` of type `MyLTE left right`! Cool, perhaps we can just ask Idris to fill that up for us! (`C-c C-a`)
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> MyLTE n m -> MyNat
 mminus m MZ MyLTEZero = m
 mminus (MS right) (MS left) (MyLTESucc x) = mminus right left x
@@ -415,7 +415,7 @@ mminus (MS right) (MS left) (MyLTESucc x) = mminus right left x
 
 Neat!! Now let's try to use that method a bit:
 
-```idris
+```haskell
 foo : MyNat
 foo = mminus (MS (MS (MS MZ))) (MS MZ) ?prf
 ```
@@ -424,14 +424,14 @@ This is `3 - 1` with a hole for the proof.
 
 The hole looks like this:
 
-```idris
+```haskell
 - + Main.prf [P]
  `-- MyLTE (MS MZ) (MS (MS (MS MZ)))
 ```
 
 OK... So how do we proceed? Let's just ask Idris to see if it can figure out something (`C-c C-a`):
 
-```idris
+```haskell
 foo : MyNat
 foo = mminus (MS (MS (MS MZ))) (MS MZ) (MyLTESucc MyLTEZero)
 ```
@@ -448,13 +448,13 @@ Neat!
 So can we make that process automatic then? Yes if we introduce
 the proof as an implicit parameter and add the `auto` keyword! Let's try:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> {auto smaller : MyLTE n m} -> MyNat
 ```
 
 Add the body:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> {auto smaller : MyLTE n m} -> MyNat
 mminus m n = ?mminus_rhs
 ```
@@ -462,14 +462,14 @@ mminus m n = ?mminus_rhs
 Wait... Where's the proof in the body? OK actually with implict
 parameters, you have to explicitely say you need them:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> {auto smaller : MyLTE n m} -> MyNat
 mminus {smaller} m n = ?mminus_rhs
 ```
 
 Case split on the proof:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> {auto smaller : MyLTE n m} -> MyNat
 mminus {smaller = MyLTEZero} m MZ = ?mminus_rhs_1
 mminus {smaller = (MyLTESucc x)} (MS right) (MS left) = ?mminus_rhs_2
@@ -477,7 +477,7 @@ mminus {smaller = (MyLTESucc x)} (MS right) (MS left) = ?mminus_rhs_2
 
 And fill the rest:
 
-```idris
+```haskell
 mminus : (m : MyNat) -> (n : MyNat) -> {auto smaller : MyLTE n m} -> MyNat
 mminus {smaller = MyLTEZero} m MZ = m
 mminus {smaller = (MyLTESucc x)} (MS right) (MS left) = mminus right left
@@ -485,21 +485,21 @@ mminus {smaller = (MyLTESucc x)} (MS right) (MS left) = mminus right left
 
 And now we can try again our substraction:
 
-```idris
+```haskell
 foo : MyNat
 foo = mminus (MS (MS (MS MZ))) (MS MZ)
 ```
 
 Sweet! And if we do something more funky:
 
-```idris
+```haskell
 foo' : MyNat -> MyNat
 foo' n = mminus (mplus (MS MZ) n) (MS MZ)
 ```
 
 Yep that still works! Neato. Wait so how about this:
 
-```idris
+```haskell
 foo'' : MyNat -> MyNat
 foo'' n = mminus (mplus n (MS MZ)) (MS MZ)
 
