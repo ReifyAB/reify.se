@@ -5,12 +5,8 @@ tagline: Puts the Ninja in the Jawa
 ---
 {% include JB/setup %}
 
-You have now entered the realm of Jawaninja.
-
-**Do not panic!**
-
-Only friendly geekiness around here. Mostly about Clojure, music and
-other interests of mine.
+On a journey to understanding the nature of programming. In love with
+Clojure and Idris.
 
 <h3>What's up?</h3>
 
