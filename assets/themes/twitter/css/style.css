@@ -98,18 +98,19 @@ ul.posts {
   margin-bottom: 10px;
   list-style-type: none;}
 ul.posts li {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 ul.posts li .date {
   padding-left: 10px;
   padding-right: 10px;
-  border: 1px solid #eee;}
+  border: 3px solid #eee;}
 ul.posts li .tagline {
   font-style: italic;}
 ul.posts li .brief {
   padding: 10px;
   color: #777;
-  border-left: 1px solid #eee;
+  border-left: 3px solid #eee;
+  border-bottom: 3px solid #eee;
 }
 ul.posts li .read-on {
   display: inline-block;

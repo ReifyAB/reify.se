@@ -6,12 +6,10 @@ tagline: "ReactJS Göteborg 2017"
 tags : [talks, programming]
 ---
 
-<iframe allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" src="https://fast.wistia.com/embed/iframe/ttg1h2lei0" width="480" height="270"></iframe>
+<a href="https://www.elastic.co/videos/functional-programming-the-sequel-by-jean-louis-giordano" target="_blank">
+<img src="/assets/images/fp_the_sequel.png">
+</a>
 
-<!-- more -->
+Event page: [https://www.meetup.com/ReactJS-Goteborg/events/236379075](https://www.meetup.com/ReactJS-Goteborg/events/236379075){:target="_blank"}
 
-<br/>
-
-Event page: [https://www.meetup.com/ReactJS-Goteborg/events/236379075]()
-
-Slides available here: [https://github.com/Jell/intro-to-fp]()
+Slides available here: [https://github.com/Jell/intro-to-fp](https://www.meetup.com/ReactJS-Goteborg/events/236379075){:target="_blank"}
