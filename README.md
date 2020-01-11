@@ -1,4 +1,4 @@
-# Jawaninja
+# Qapla Tech Blog
 
 ## Dev
 

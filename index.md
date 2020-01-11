@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Jawaninja
+title: Qapla Tech
 tagline: Value-Oriented Development
 ---
 {% include JB/setup %}
