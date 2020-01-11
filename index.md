@@ -1,12 +1,9 @@
 ---
 layout: page
 title: Jawaninja
-tagline: Puts the Ninja in the Jawa
+tagline: Value-Oriented Development
 ---
 {% include JB/setup %}
-
-On a journey to understanding the nature of programming. In love with
-Clojure and Idris.
 
 <h3>What's up?</h3>
 
