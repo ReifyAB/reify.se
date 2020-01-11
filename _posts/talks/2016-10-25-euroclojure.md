@@ -10,6 +10,6 @@ tags : [talks, programming]
 <img src="/assets/images/a_tale_of_cljs.png">
 </a>
 
-Euroclojure 2016: [http://2016.euroclojure.org/]()
+Euroclojure 2016: [http://2016.euroclojure.org/](http://2016.euroclojure.org/){:target="_blank"}
 
-My slides: [https://github.com/Jell/euroclojure-2016]()
+My slides: [https://github.com/Jell/euroclojure-2016](https://github.com/Jell/euroclojure-2016){:target="_blank"}
