@@ -98,7 +98,7 @@ ul.posts {
   margin-bottom: 10px;
   list-style-type: none;}
 ul.posts li {
-  margin-bottom: 30px;
+  margin-bottom: 80px;
 }
 ul.posts li .date {
   padding-left: 10px;
@@ -107,14 +107,16 @@ ul.posts li .date {
 ul.posts li .tagline {
   font-style: italic;}
 ul.posts li .brief {
-  padding: 10px;
+  padding: 20px 20px 10px 20px;
   color: #777;
   border-left: 3px solid #eee;
   border-bottom: 3px solid #eee;
 }
 ul.posts li .read-on {
   display: inline-block;
-  background-color: #eee;
+  border-left: 3px solid #eee;
+  border-right: 3px solid #eee;
+  border-bottom: 3px solid #eee;
   padding: 10px;}
 ul.posts li .read-on:hover {
   text-decoration: none;

@@ -14,7 +14,7 @@ tagline: Value-Oriented Development
     <div class="brief">
       {{ post.content | split: '<!-- more -->' | first }}
     </div>
-    <a href="{{ BASE_PATH }}{{ post.url }}" class="read-on">Read on →</a>
+    <a href="{{ BASE_PATH }}{{ post.url }}" class="read-on pull-right">Read on →</a>
   </li>
   {% endfor %}
 </ul>
