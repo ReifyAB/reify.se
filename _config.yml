@@ -8,12 +8,12 @@ highlighter: rouge
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
-title : Qapla Tech
+title : Reify
 tagline: Value-Oriented Development
 author :
   name : Jean-Louis Giordano
   title: "Value-Oriented Developer"
-  email : jean-louis@qapla.tech
+  email : jean-louis@reify.se
   github : Jell
   twitter : jellismymind
 
@@ -25,7 +25,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : https://qapla.tech
+production_url : https://reify.se
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -82,7 +82,7 @@ JB :
   comments :
     provider : disqus
     disqus :
-      short_name : qapla
+      short_name : reify
 
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.

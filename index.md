@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Qapla Tech
+title: Reify
 tagline: Value-Oriented Development
 ---
 {% include JB/setup %}

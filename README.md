@@ -1,4 +1,4 @@
-# Qapla Tech Blog
+# Reify Blog
 
 ## Dev
 
