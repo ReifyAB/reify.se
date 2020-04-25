@@ -1,6 +1,6 @@
 ---
 layout: intro
-title: Reify
+title: Reify AB
 tagline: Value-Oriented Programming
 ---
 {% include JB/setup %}
