@@ -1,20 +1,34 @@
 ---
-layout: page
+layout: intro
 title: Reify
-tagline: Value-Oriented Development
+tagline: Value-Oriented Programming
 ---
 {% include JB/setup %}
 
-<h3>What's up?</h3>
+## Hey there!
 
-<ul class="posts">
-  {% for post in site.posts %}
-  <li>
-    {% include post_listing.html %}
-    <div class="brief">
-      {{ post.content | split: '<!-- more -->' | first }}
-    </div>
-    <a href="{{ BASE_PATH }}{{ post.url }}" class="read-on pull-right">Read on →</a>
-  </li>
-  {% endfor %}
-</ul>
+Happy to see you here!
+
+How can I help?
+
+I have a broad area of knowledge and interests, with startup experience and expertise in **distributed systems**, **micro-services**, **cloud
+platforms** and **technical leadership**.
+
+With over a decade of professional experience all levels (**operational**, **tactical** and **strategic**), I can help out with:
+
+* building **Proof-of-Concepts** from scratch for your business idea
+
+* firguring out solutions to tricky **automation problems**
+
+* helping you transition to a micro-service infrastructure on **Amazon Web Services**
+
+* offering an extra hand to help you reach your **delivery goals**
+
+* dealing with some **legacy** Ruby-on-Rails codebase
+
+* providing business and **strategic analysis** with a technical perspective
+
+* acting as interim / **freelance CTO** or Principal Engineer
+
+
+But enough about me, tell me about you? What does success look like to you? Let's talk!

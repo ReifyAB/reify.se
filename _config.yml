@@ -1,18 +1,18 @@
 # This is the default format.
 # For more see: http://jekyllrb.com/docs/permalinks/
-permalink: /:categories/:year/:month/:day/:title
+permalink: /blog/:year-:month-:day-:title
 
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "Dockerfile", "docker-compose.yml", ".git", "CNAME"]
 highlighter: rouge
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
 title : Reify
-tagline: Value-Oriented Development
+tagline: Value-Oriented Programming
 author :
   name : Jean-Louis Giordano
-  title: "Value-Oriented Developer"
+  title: "Value-Oriented Programmer"
   email : jean-louis@reify.se
   github : Jell
   twitter : jellismymind
