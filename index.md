@@ -18,7 +18,7 @@ With over a decade of professional experience all levels (**operational**, **tac
 
 * building **Proof-of-Concepts** from scratch for your business idea
 
-* firguring out solutions to tricky **automation problems**
+* figuring out solutions to tricky **automation problems**
 
 * helping you transition to a micro-service infrastructure on **Amazon Web Services**
 
