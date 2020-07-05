@@ -14,7 +14,7 @@ How can I help?
 I have a broad area of knowledge and interests, with startup experience and expertise in **distributed systems**, **micro-services**, **cloud
 platforms** and **technical leadership**.
 
-With over a decade of professional experience all levels (**operational**, **tactical** and **strategic**), I can help out with:
+With over a decade of professional experience at all levels (**operational**, **tactical** and **strategic**), I can help out with:
 
 * building **Proof-of-Concepts** from scratch for your business idea
 
