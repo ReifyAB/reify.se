@@ -7,9 +7,7 @@ tagline: Value-Oriented Programming
 
 ## Hey there!
 
-Happy to see you here!
-
-How can I help?
+Happy to see you! How can I help?
 
 I have a broad area of knowledge and interests, with startup experience and expertise in **distributed systems**, **micro-services**, **cloud
 platforms** and **technical leadership**.
