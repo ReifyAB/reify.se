@@ -1,4 +1,4 @@
-<footer>
-  <p>&copy; {{ site.time | date: '%Y' }} Reify AB</p>
-  <p>Organization number: 559237-4812</p>
+<footer class="site-footer">
+  <p>&copy; {{ site.time | date: '%Y' }} {{ site.company.name }} · <span class="nowrap">Organization number {{ site.company.org_number }}</span></p>
+  <p><a href="{{ '/atom.xml' | relative_url }}">Feed</a></p>
 </footer>

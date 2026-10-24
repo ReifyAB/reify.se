@@ -1,0 +1,18 @@
+{% assign author = site.author %}
+<div class="profile">
+  <img class="profile__picture" src="{{ author.picture | relative_url }}" alt="{{ author.name }}" width="160" height="160">
+  <h2 class="profile__name">{{ author.name }}</h2>
+  {% if author.title %}<p class="profile__title">{{ author.title }}</p>{% endif %}
+
+  <ul class="profile__links">
+    {% if author.email %}
+    <li><a href="mailto:{{ author.email }}">{{ author.email }}</a></li>
+    {% endif %}
+    {% if author.linkedin %}
+    <li><a href="https://www.linkedin.com/in/{{ author.linkedin }}/" rel="me">LinkedIn</a></li>
+    {% endif %}
+    {% if author.github %}
+    <li><a href="https://github.com/{{ author.github }}" rel="me">GitHub</a></li>
+    {% endif %}
+  </ul>
+</div>

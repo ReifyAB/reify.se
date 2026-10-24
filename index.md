@@ -1,9 +1,7 @@
 ---
-layout: intro
+layout: home
 title: Reify AB
-tagline: Value-Oriented Programming
 ---
-{% include JB/setup %}
 
 ## Hey there!
 
@@ -29,4 +27,6 @@ With over a decade of professional experience at all levels (**operational**, **
 * acting as interim / **freelance CTO** or Principal Engineer
 
 
-But enough about me, tell me about you? What does success look like to you? Let's talk!
+But enough about me, tell me about you? What does success look like to you?
+
+<a class="button" href="mailto:{{ site.author.email }}">Let's talk →</a>

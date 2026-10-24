@@ -1,7 +1,30 @@
 ---
 layout: default
-with-comments: true
-with-pagination: true
 ---
-{% include JB/setup %}
-{% include themes/twitter/post.html %}
+<article class="post">
+  <header class="page-header">
+    <p class="meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {% for tag in page.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+    </p>
+    <h1>{{ page.title }}</h1>
+    {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
+  </header>
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  <nav class="post-nav" aria-label="More posts">
+    {% if page.previous %}
+    <a class="post-nav__prev" href="{{ page.previous.url | relative_url }}">
+      <span>← Previous</span>{{ page.previous.title }}
+    </a>
+    {% endif %}
+    {% if page.next %}
+    <a class="post-nav__next" href="{{ page.next.url | relative_url }}">
+      <span>Next →</span>{{ page.next.title }}
+    </a>
+    {% endif %}
+  </nav>
+</article>

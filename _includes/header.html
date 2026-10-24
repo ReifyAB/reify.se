@@ -1,0 +1,26 @@
+<header class="site-header">
+  <a class="site-header__brand" href="{{ '/' | relative_url }}">
+    {%- comment -%}
+      Logo source and build script live in the separate logo repository.
+      This is the "-small" build, with halftone dots sized for the header.
+      The SVG switches to its dark colours with the visitor's system setting.
+    {%- endcomment -%}
+    <img class="site-header__logo" src="{{ '/assets/images/reify-logo-small.svg' | relative_url }}"
+         alt="{{ site.title }}" width="1325" height="805">
+    <span class="site-header__tagline">{{ site.tagline }}</span>
+  </a>
+
+  {%- comment -%}
+    Any page with `nav_order` in its front matter shows up here, lowest first.
+  {%- endcomment -%}
+  {% assign nav_pages = site.pages | where_exp: "p", "p.nav_order" | sort: "nav_order" %}
+  <nav class="site-nav" aria-label="Main">
+    {% for p in nav_pages %}
+    {% assign section = p.url | split: "/" | slice: 1 | first %}
+    <a href="{{ p.url | relative_url }}"
+       {% if page.url == p.url or section and page.url contains section %}aria-current="page"{% endif %}>
+      {{ p.nav_title | default: p.title }}
+    </a>
+    {% endfor %}
+  </nav>
+</header>

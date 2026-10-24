@@ -1,0 +1,18 @@
+{%- comment -%}
+  Usage: {% include post_list.html posts=site.posts excerpts=true %}
+  With excerpts, each post shows its `description` from the front matter,
+  or else the first 40 words of the post.
+{%- endcomment -%}
+<ul class="post-list">
+  {% for post in include.posts %}
+  <li class="post-list__item">
+    <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+    <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+    {% if post.tagline %}<p class="tagline">{{ post.tagline }}</p>{% endif %}
+    {% if include.excerpts %}
+    <p class="post-list__excerpt">{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncatewords: 40 }}</p>
+    <a class="post-list__more" href="{{ post.url | relative_url }}">Read on →</a>
+    {% endif %}
+  </li>
+  {% endfor %}
+</ul>
