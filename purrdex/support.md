@@ -2,7 +2,7 @@
 title: Purrdex support
 description: "Help with Purrdex, a field guide for the street cats you meet, made by Reify AB."
 permalink: /purrdex/support
-sidebar: false
+layout: bare
 ---
 
 Purrdex is a field guide for the street cats you meet, made by Reify AB.

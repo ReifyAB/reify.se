@@ -3,7 +3,7 @@ title: Purrdex privacy policy
 tagline: 23 October 2026
 description: "Purrdex does not collect any data about you."
 permalink: /purrdex/privacy
-sidebar: false
+layout: bare
 ---
 
 Purrdex is made by Reify AB. It does not collect any data about you.
